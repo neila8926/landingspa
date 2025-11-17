@@ -79,7 +79,7 @@ const ServiceRow = ({ title, services }) => {
           <motion.div
             drag="x"
             dragConstraints={{ right: 0, left: -width }}
-            className="flex space-x-6"
+            className="flex space-x-6 justify-start sm:justify-center"
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
             {services.map((service) => (

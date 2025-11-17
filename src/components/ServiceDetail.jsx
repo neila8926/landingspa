@@ -48,9 +48,9 @@ const ServiceDetail = ({ title, services }) => {
           <h3 className="text-xl sm:text-3xl font-bold">{title}</h3>
           
         </div>
-        <motion.div ref={constraintsRef} className="overflow-x-auto scrollbar-hide relative cursor-grab" whileTap={{ cursor: "grabbing" }}>
+        <motion.div ref={constraintsRef} className="cursor-grab active:cursor-grabbing overflow-hidden relative" whileTap={{ cursor: "grabbing" }}>
           <motion.div
-            className="flex space-x-6 justify-center"
+            className="flex space-x-6 justify-start sm:justify-center"
             drag="x"
             dragConstraints={dragConstraints}
           >

@@ -51,7 +51,7 @@ const HeroBanner = () => {
           className="text-lg md:text-xl mb-8 max-w-3xl mx-auto text-shadow"
           variants={itemVariants}
         >
-          Tratamientos faciales de vanguardia
+          Tratamientos faciales y corporales de vanguardia
         </motion.p>
         <motion.div
           className="flex flex-col sm:flex-row gap-4 justify-center"
