@@ -12,7 +12,7 @@ import ServiceDetail from './components/ServiceDetail.jsx';
 
 function App() {
   return (
-    <div className="bg-black">
+    <div className="bg-background min-h-screen">
       <Header />
       <main>
         <HeroBanner />
@@ -20,7 +20,7 @@ function App() {
         <ServiceDetail title="Tipos de servicios" services={advancedAesthetics} />
         <TestimonialBlock />
         <CtaLeadForm />
-        <Ubicacion/>
+        <Ubicacion />
       </main>
       <Footer />
     </div>

@@ -1,64 +1,47 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const ServiceCard = ({ service }) => {
   return (
-    <div className="group relative flex-none w-64 h-76  rounded-xl shadow-cyan-500/50" style={{backgroundImage: `url(${service.imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}>
-      
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20"></div>
-      <div className={`absolute inset-0 p-6 flex flex-col justify-end`}>
-        <h4 className="text-red text-lg">{service.name}</h4>
-        <p className="text-gray-300 text-sm mt-2 ">
+    <motion.div
+      className="group relative w-full h-80 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      <img
+        src={service.imageUrl}
+        alt={service.name}
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+      />
+
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+      <div className="absolute inset-0 p-6 flex flex-col justify-end text-white">
+        <h4 className="font-serif text-2xl font-bold mb-2 text-shadow-sm">{service.name}</h4>
+        <p className="font-sans text-gray-200 text-sm line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
           {service.benefit}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 const ServiceDetail = ({ title, services }) => {
-  const constraintsRef = useRef(null);
-  const [dragConstraints, setDragConstraints] = useState({ right: 0, left: 0 });
-
-  useEffect(() => {
-    const calculateConstraints = () => {
-      if (constraintsRef.current) {
-        const containerWidth = constraintsRef.current.offsetWidth;
-        const contentWidth = constraintsRef.current.scrollWidth;
-        const newLeftConstraint = contentWidth > containerWidth ? -(contentWidth - containerWidth) : 0;
-        setDragConstraints({ right: 0, left: newLeftConstraint });
-      }
-    };
-
-    // A small delay to ensure content is loaded and rendered
-    const timer = setTimeout(calculateConstraints, 100);
-
-    window.addEventListener('resize', calculateConstraints);
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('resize', calculateConstraints);
-    };
-  }, [services]);
-
   return (
-    <section id="servicios" className="py-16 bg-black text-white">
+    <section id="tipos-servicios" className="py-20 bg-background/50">
       <div className="container mx-auto px-4">
-        <div className="flex-col sm:lex justify-center sm:justify-between items-center mb-8">
-          <h3 className="text-xl sm:text-3xl font-bold">{title}</h3>
-          
+        <div className="text-center mb-12">
+          <h3 className="font-serif text-3xl md:text-4xl font-bold text-primary mb-3">{title}</h3>
+          <p className="font-sans text-textLight text-lg max-w-2xl mx-auto">Explora nuestras categorías especializadas</p>
         </div>
-        <motion.div ref={constraintsRef} className="cursor-grab active:cursor-grabbing overflow-hidden relative" whileTap={{ cursor: "grabbing" }}>
-          <motion.div
-            className="flex space-x-6 justify-start sm:justify-center"
-            drag="x"
-            dragConstraints={dragConstraints}
-          >
-            {services.map((service) => (
-              <ServiceCard key={service.id} service={service} />
-            ))}
-          </motion.div>
-        </motion.div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {services.map((service) => (
+            <ServiceCard key={service.id} service={service} />
+          ))}
+        </div>
       </div>
     </section>
   );
