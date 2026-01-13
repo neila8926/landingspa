@@ -26,7 +26,7 @@ const Header = () => {
     { name: 'Inicio', href: '#inicio' },
     { name: 'Servicios', href: '#servicios' },
     { name: 'Testimonios', href: '#testimonios' },
-    { name: 'Contacto', href: '#contacto' },
+    { name: 'Contacto', href: '#ubicacion' },
   ];
 
   return (
@@ -59,8 +59,8 @@ const Header = () => {
           <a
             href="#reservar"
             className={`px-6 py-2 rounded-full font-serif font-bold transition-all duration-300 transform hover:scale-105 ${isScrolled
-                ? 'bg-primary text-white hover:bg-opacity-90'
-                : 'bg-white text-textDark hover:bg-secondary hover:text-white'
+              ? 'bg-primary text-white hover:bg-opacity-90'
+              : 'bg-white text-textDark hover:bg-secondary hover:text-white'
               }`}
           >
             Reservar

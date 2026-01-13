@@ -26,7 +26,7 @@ const HeroBanner = () => {
   };
 
   return (
-    <section className="h-screen relative flex items-center justify-center text-white overflow-hidden">
+    <section id="inicio" className="h-screen relative flex items-center justify-center text-white overflow-hidden">
       <video
         src={videoBG}
         autoPlay

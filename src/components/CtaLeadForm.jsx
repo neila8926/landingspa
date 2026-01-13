@@ -17,13 +17,38 @@ const CtaLeadForm = () => {
       [name]: value
     }));
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form data submitted:', formData);
-    const message = `- *Nombre:* ${formData.name} - *Email:* ${formData.email} - *Teléfono:* ${formData.phone} - *Mensaje:* ${formData.message} - *Fecha:* ${formData.date} - *Hora:* ${formData.time}`;
-    window.open(`https://wa.me/573154251382?text=${message}`);
-    setFormData({ name: '', email: '', phone: '', message: '', date: new Date().toISOString().split('T')[0], time: '08:00' });
+
+    // Estructura de mensaje profesional y organizada
+    const message = `✨ *Nueva Solicitud de Cita* ✨
+  
+*Cliente:* ${formData.name}
+*Teléfono:* ${formData.phone}
+*Email:* ${formData.email}
+
+📅 *Fecha:* ${formData.date}
+⏰ *Hora:* ${formData.time}
+
+📝 *Descripción del servicio:* ${formData.message}
+
+---
+_Enviado desde el sitio web_`;
+
+    // Es fundamental usar encodeURIComponent para manejar espacios y caracteres especiales
+    const whatsappUrl = `https://wa.me/573154251382?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappUrl, '_blank');
+
+    // Reset del formulario
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      message: '',
+      date: new Date().toISOString().split('T')[0],
+      time: '08:00'
+    });
   };
 
   return (
