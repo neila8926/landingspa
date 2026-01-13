@@ -26,8 +26,32 @@ const Header = () => {
     { name: 'Inicio', href: '#inicio' },
     { name: 'Servicios', href: '#servicios' },
     { name: 'Testimonios', href: '#testimonios' },
-    { name: 'Contacto', href: '#ubicacion' },
+    { name: 'Ubicación', href: '#ubicacion' },
   ];
+
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      setTimeout(() => {
+        const headerOffset = 100;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+
+        // Update URL without triggering reload
+        window.history.pushState(null, null, href);
+      }, 250);
+    }
+  };
 
   return (
     <header
@@ -36,7 +60,7 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
-        <a href="#" className="block">
+        <a href="#" className="block" onClick={(e) => handleNavClick(e, '#inicio')}>
           <img
             src={isScrolled ? logo : logoBlanco}
             alt="Yolima Ballesta Spa"
@@ -50,6 +74,7 @@ const Header = () => {
             <a
               key={link.name}
               href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
               className={`font-sans text-sm tracking-widest uppercase hover:text-secondary transition-colors ${isScrolled ? 'text-textDark' : 'text-white'
                 }`}
             >
@@ -58,6 +83,7 @@ const Header = () => {
           ))}
           <a
             href="#reservar"
+            onClick={(e) => handleNavClick(e, '#reservar')}
             className={`px-6 py-2 rounded-full font-serif font-bold transition-all duration-300 transform hover:scale-105 ${isScrolled
               ? 'bg-primary text-white hover:bg-opacity-90'
               : 'bg-white text-textDark hover:bg-secondary hover:text-white'
@@ -101,7 +127,7 @@ const Header = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="font-sans text-textDark text-lg tracking-wide hover:text-primary transition-colors"
                 >
                   {link.name}
@@ -109,7 +135,7 @@ const Header = () => {
               ))}
               <a
                 href="#reservar"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={(e) => handleNavClick(e, '#reservar')}
                 className="px-8 py-3 bg-primary text-white rounded-full font-serif font-bold hover:bg-opacity-90 transition-all"
               >
                 Reservar
