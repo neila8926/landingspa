@@ -62,7 +62,7 @@ _Enviado desde el sitio web_`;
 
           {/* Text Side */}
           <div className="md:w-1/2 p-10 bg-primary text-white flex flex-col justify-center">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">¿Lista para tu Transformación?</h2>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">Porque tú te lo mereces</h2>
             <p className="font-sans text-white/90 text-lg mb-8 leading-relaxed">
               Reserva tu cita hoy mismo y déjanos cuidar de ti. Un viaje hacia la relajación y la belleza te espera.
             </p>
